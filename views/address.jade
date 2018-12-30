@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  - var satoshi = 100000000;
+  - var sent = address.sent / 100000000
+  - var received = address.received / 100000000
+  - var balance = received - sent;
+  .col-xs-12.col-md-10.col-md-offset-1
+    .panel.panel-default.panel-address-summary.coin-table
+      .panel-heading(style='position:relative;')        
+        strong #{address.a_id} - Balance #{balance.toFixed(8)}
+    .panel.panel-default
+      .panel-heading
+        strong Latest Transactions
+      table.table.table-bordered.table-striped
+        include ./includes/address_history.jade

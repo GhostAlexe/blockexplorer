@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+const debug = require('debug')('explorer');
+const settings = require('../config/settings');
+const db = require('../lib/database');
+const app = require('../app');
+
+app.set('port', process.env.PORT || settings.port);
+
+const databaseUri = settings.database.uri;
+
+db.connect(databaseUri, function() {
+  db.check_stats(settings.coin, function(exists) {
+    if (exists === false) {
+      console.log('no stats entry found, creating now..');
+      db.create_stats(settings.coin, function(){
+        //console.log('stats entry created successfully.');
+      });
+    } else {
+      db.get_stats(settings.coin, function (stats) {
+        app.locals.stats = stats;
+      });
+    }
+  });
+  
+  db.check_richlist(settings.coin, function(exists){
+    if (exists === false) {
+      console.log('no richlist entry found, creating now..');
+      db.create_richlist(settings.coin, function() {
+
+      });
+    }
+  });
+
+  const server = app.listen(app.get('port'), function() {
+    debug('Listening on port ' + server.address().port);
+  });
+});

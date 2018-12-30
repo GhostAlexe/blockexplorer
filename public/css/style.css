@@ -1,0 +1,84 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  padding: 120px 30px;
+}
+
+.coin-stats {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.coin-table {
+	margin-top: 20px;
+}
+
+.footer {
+	padding: 2.8125rem 0;
+	margin: 4.6875rem auto 0;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+
+.label a {
+	color: #ffffff !important;
+}
+
+.logo {
+	width: 40px;
+	height: 40px !important;
+	margin: 10px !important;
+	padding: 0 !important;
+}
+
+.menu-text {
+	margin-left:5px;
+}
+
+.navbar {
+	background-image: linear-gradient(to right, #3d34cc 0%,#2dd0ab 100%) !important;
+	background-color: #000 !important;
+	border-bottom: none !important;
+}
+
+.navbar-header {
+	display: flex;
+	align-items: center;
+}
+
+.navbar-nav > li > a {
+	padding-top: 20px !important;
+	padding-bottom: 20px !important;
+}
+
+.navbar-nav a:hover {
+	background-color: #22222222 !important;
+}
+
+.navbar-nav > .active > a {
+	background-color: #33333344 !important;
+}
+
+#summary-panel {
+	margin: 0 !important;
+}
+
+table, tr {
+	width: 100% !important;
+}
+
+.dataTables_length {
+	padding: 10px 0 0 10px !important;
+}
+
+.top-label {
+	width:20px;
+	height:20px;
+	margin-right:6px;
+}

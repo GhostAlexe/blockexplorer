@@ -1,0 +1,89 @@
+extends layout
+
+block content
+  - var time = format_unixtime(tx.timestamp)
+  .col-xs-12.col-md-10.col-md-offset-1
+    .well.well-sm.hidden-lg.hidden-md(style='word-wrap:break-word;')
+      | #{tx.txid}
+    .panel.panel-default.coin-table
+      .panel-heading.hidden-xs
+        strong txid: #{tx.txid}
+      table.table.table-bordered.table-striped.summary-table 
+        thead
+          tr
+            th Confirmations
+            th.hidden-xs Block Hash
+            th Timestamp
+            th
+        tbody
+          - var confirms = (blockcount - tx.blockindex);
+          tr
+              td #{confirms}
+              td.hidden-xs
+                a(href='/block/#{tx.blockhash}') #{tx.blockhash}
+              td #{time}
+              td.text-center
+                a(href='/block/#{tx.blockhash}')
+                  span.glyphicon.glyphicon-eye-open
+    if tx.vout.length < 1
+      .alert.alert-info(role='alert', style='text-align:center;')   
+        strong NONSTANDARD TX
+    else
+      .row
+        .col-md-6
+          .panel.panel-default
+            .panel-heading
+              strong Input Addresses
+            table.table.table-bordered.table-striped.summary-table 
+              thead
+                tr
+                  th Address
+                  if (tx.vin.length > 0)
+                    if tx.vin[0].addresses != 'coinbase'
+                      th.hidden-xs Amount
+              tbody
+                if tx.vin.length > 0
+                  each r in tx.vin
+                    if r.addresses == 'coinbase' 
+                      tr.info(style='text-align:center')
+                        td New Coins
+                    else
+                      - var ramount = r.amount / 100000000
+                      tr
+                        td 
+                          a.loading(href='/address/#{r.addresses}') 
+                            =r.addresses
+                        td.danger.hidden-xs #{ramount.toFixed(8)}
+                      tr.hidden-lg.hidden-md
+                          td.danger #{ramount.toFixed(8)}
+                else
+                  tr.info(style='text-align:center')
+                    td PoS
+        .col-md-6
+          .panel.panel-default
+            .panel-heading
+              strong Recipients
+            table.table.table-bordered.table-striped.summary-table 
+              thead
+                tr
+                  th Address
+                  th.hidden-xs Amount
+              tbody
+                each r in tx.vout
+                  if tx.vout.length > 0 
+                    - var ramount = r.amount / 100000000  
+                    tr
+                      td 
+                        a.loading(href='/address/#{r.addresses}') 
+                          =r.addresses 
+                      td.success.hidden-xs  #{ramount.toFixed(8)}
+                    tr.hidden-lg.hidden-md
+                      td.success #{ramount.toFixed(8)}
+                  else
+                    tr
+                      td 
+                        a.loading(href='/address/#{r.addresses}') 
+                          =r.addresses 
+                      td.success.hidden-xs  #{ramount.toFixed(8)}
+                    tr.hidden-lg.hidden-md
+                      td.success #{ramount.toFixed(8)}

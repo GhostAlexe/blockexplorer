@@ -1,0 +1,35 @@
+extends layout
+
+block content   
+  script.
+    $(document).ready(function(){
+      var ctable = $('#connections-table').dataTable( {  
+        autoWidth: true,      
+        searching: false,
+        ordering: false,
+        responsive: true,
+        lengthChange: true,
+        processing: true,
+        ajax: {
+          url: '/ext/connections',
+        },
+        columns: [
+          { data: 'address', width: '25%' },
+          { data: 'protocol', width: '25%' },
+          { data: 'version', width:'25%' },
+          { data: 'country', width: '25%'}
+        ]
+      });
+    });
+  .col-md-12(style="margin-bottom: 4%")
+    .panel.panel-default.coin-table
+      .panel-heading
+        strong Connections
+      table#connections-table.table.table-bordered.table-striped
+        thead
+          tr
+            th.text-center Address
+            th.text-center Protocol
+            th.text-center Sub version
+            th.text-center Country
+        tbody.text-center
