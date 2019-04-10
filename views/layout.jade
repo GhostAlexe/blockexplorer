@@ -34,6 +34,18 @@ html
             $("#lblBlockcount").text(json.data[0].blockcount);
             $("#lblX1").text(' ');
           }});
+
+          $.get('https://exchange.digitalworldexchange.com/frontoffice/api/statistic/price?asset=dwe').then(function(res) {
+            $("#lastPrice").text("$" + parseFloat(res.price).toFixed(6));
+          });
+
+          $.get('https://exchange.digitalworldexchange.com/frontoffice/api/statistic/traded-dwe?asset=btc').then(function (res) {
+            $("#exchangedBTC").text(res.usedAssetAmount);
+          });
+
+          $.get('https://exchange.digitalworldexchange.com/frontoffice/api/statistic/volume?asset=dwe').then(function (res) {
+            $("#24hVolume").text(res.volume);
+          });
         }
         $('.block-last-next').tooltip({
           animation: true,
@@ -105,7 +117,13 @@ html
                 span.menu-text Top 100
     .col-md-12
       .row.text-center
-        .col-md-2.col-md-offset-2
+        .col-md-2
+          .panel.panel-default.hidden-sm.hidden-xs
+            .panel-heading
+              strong Exchanged BTC
+            .panel-body
+              label#exchangedBTC -
+        .col-md-2
           .panel.panel-default.hidden-sm.hidden-xs
             .panel-heading
               strong Coin Supply
@@ -116,7 +134,7 @@ html
             .panel-heading
               strong USD Price
             .panel-body
-              label#lastPrice $1.27
+              label#lastPrice
         .col-md-2
           .panel.panel-default.hidden-sm.hidden-xs
             .panel-heading
@@ -129,6 +147,12 @@ html
               strong Connections
             .panel-body
                label#lblConnections -
+        .col-md-2
+          .panel.panel-default.hidden-sm.hidden-xs
+            .panel-heading
+              strong 24h Volume
+            .panel-body
+              label#24hVolume -
 
     block content
 

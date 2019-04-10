@@ -22,7 +22,7 @@ db.connect(databaseUri, function() {
     }
   });
   
-  db.check_richlist(settings.coin, function(exists){
+  db.check_richlist(settings.coin, function(exists) {
     if (exists === false) {
       console.log('no richlist entry found, creating now..');
       db.create_richlist(settings.coin, function() {
