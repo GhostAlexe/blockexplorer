@@ -65,6 +65,10 @@ body {
 	background-color: #33333344 !important;
 }
 
+.panel-default {
+	overflow: hidden !important;
+}
+
 #summary-panel {
 	margin: 20px 0 !important;
 }
