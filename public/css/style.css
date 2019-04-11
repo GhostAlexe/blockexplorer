@@ -108,7 +108,10 @@ table, tr {
 	}
 
 	.paginate_button.previous,
-	.paginate_button.active,
+	.paginate_button:nth-child(2),
+	.paginate_button:nth-child(3),
+	.paginate_button:nth-last-child(2),
+	.paginate_button:nth-last-child(3),
 	.paginate_button.next {
 		display: inline !important;
 	}
